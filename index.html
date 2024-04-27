@@ -21,6 +21,9 @@
       width: 100%;
       height: 100%;
     }
+    #about-me {
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -31,11 +34,16 @@
   <div id="twitch" class="hide">
   </div>
 
+  <div id="about-me" class="hide">
+    <h2>About Me</h2>
+    <p>I’m 19, love to game and have some guns with my friends. and chat to all who show up to my stream.</p>
+  </div>
+
   <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 
   <script type="text/javascript">
     var options = {
-      channel: "tzshaun", // TODO: Change this to the streams username you want to embed
+      channel: "tzshaun", // TODO: Change this to the streamer's username you want to embed
       width: 640,
       height: 360,
     };
@@ -52,6 +60,7 @@
     function handleOnline() {
       document.getElementById("twitch").classList.remove('hide');
       document.getElementById("not-live").classList.add('hide');
+      document.getElementById("about-me").classList.remove('hide');
       player.removeEventListener(Twitch.Player.ONLINE, handleOnline);
       player.addEventListener(Twitch.Player.OFFLINE, handleOffline);
       player.setMuted(false);
@@ -60,6 +69,7 @@
     function handleOffline() {
       document.getElementById("twitch").classList.add('hide');
       document.getElementById("not-live").classList.remove('hide');
+      document.getElementById("about-me").classList.add('hide');
       player.removeEventListener(Twitch.Player.OFFLINE, handleOffline);
       player.addEventListener(Twitch.Player.ONLINE, handleOnline);
       player.setMuted(true);
