@@ -1,5 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twitch Stream</title>
   <style>
     .hide { display:none; }
 
@@ -17,19 +21,21 @@
       width: 100%;
       height: 100%;
     }
-    </style>
+  </style>
 </head>
 
 <body>
 
-  <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+  <h1 id="not-live" class="hide">Shaun is not live, please wait for the next live stream</h1>
 
   <div id="twitch" class="hide">
   </div>
 
+  <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+
   <script type="text/javascript">
     var options = {
-      channel: "ottersmacks", // TODO: Change this to the streams username you want to embed
+      channel: "tzshaun", // TODO: Change this to the streams username you want to embed
       width: 640,
       height: 360,
     };
@@ -45,6 +51,7 @@
 
     function handleOnline() {
       document.getElementById("twitch").classList.remove('hide');
+      document.getElementById("not-live").classList.add('hide');
       player.removeEventListener(Twitch.Player.ONLINE, handleOnline);
       player.addEventListener(Twitch.Player.OFFLINE, handleOffline);
       player.setMuted(false);
@@ -52,6 +59,7 @@
 
     function handleOffline() {
       document.getElementById("twitch").classList.add('hide');
+      document.getElementById("not-live").classList.remove('hide');
       player.removeEventListener(Twitch.Player.OFFLINE, handleOffline);
       player.addEventListener(Twitch.Player.ONLINE, handleOnline);
       player.setMuted(true);
